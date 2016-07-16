@@ -1,0 +1,9 @@
+I"~(function() {
+  jQuery(function() {
+    return $("#todo_items").sortable({
+      axis: 'y'
+    });
+  });
+
+}).call(this);
+:ET

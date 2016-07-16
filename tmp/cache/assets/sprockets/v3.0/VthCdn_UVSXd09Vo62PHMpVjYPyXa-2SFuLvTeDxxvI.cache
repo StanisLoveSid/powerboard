@@ -1,0 +1,7 @@
+I"g(function() {
+  jQuery(function() {
+    return $("#todo_items").sortable();
+  });
+
+}).call(this);
+:ET

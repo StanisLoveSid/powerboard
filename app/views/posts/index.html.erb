@@ -1,0 +1,105 @@
+
+<div class="paper", style="width: 30%;position: absolute; top: 16%;left: 67%;">
+<div class="tags", style="padding-left: 9%;">
+
+  <% tag_cloud Post.tag_counts.sort { |x, y| x.name <=> y.name }, %w[s m l] do |tag, css_class| %>
+  <%= link_to tag.name, tag_url( :tag => tag.name ), :class => "tag" %>
+<% end %>
+ </div>
+  </div>
+
+<div class="thebard">
+<style>
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+.area{
+  text-align:center;
+  font-size:2.5em;
+  color: #64b5f6;
+  letter-spacing: 3px;
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  animation:blur 6.75s ;
+  text-shadow:0px 0px 10px #64b5f6,
+      0px 0px 3px #64b5f6;
+    
+}
+
+@keyframes blur{
+  from{
+
+      text-shadow:0px 0px 10px #64b5f6,
+      0px 0px 10px #64b5f6, 
+      0px 0px 25px #64b5f6,
+      0px 0px 25px #64b5f6,
+      0px 0px 25px #64b5f6,
+      0px 0px 25px #64b5f6,
+      0px 0px 25px #64b5f6,
+      0px 0px 25px #64b5f6,
+      0px 0px 50px #64b5f6,
+      0px 0px 50px #64b5f6,
+      0px 0px 50px #7B96B8,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #7B96B8;}
+}
+</style>
+
+<div class="area" style="font: bold;">
+ <i> Гироборды и пениборды</i>
+</div>
+<% @posts.each do |post| %>
+
+
+
+<div class="box15" style="width: 50%; float: left;padding-left: 3%;">
+       <h1><%= link_to post.title, post%></h1>   
+     <o>  <%=link_to image_tag(post.image.url(:small)), post %></o>
+        <p>
+              <% post.tags.each do |tag| %>
+     
+        <%= link_to tag.name, tag_path(tag.name), class: "tag"%>
+      
+<% end %>
+       </p>
+    
+       <br />
+            <ul id="menu">
+  
+
+   <li class="small material-icons", style="padding-top: 4%;">comment</li>
+ Комментарии (<%= post.comments.count %>) 
+
+ <li class="small material-icons", style="padding-left: 4%">insert_chart</li>
+<%= "Просмотры (#{post.impressionist_count}) " %>
+
+</ul>   
+<ul id="menu">
+  
+   <li id="like_post_<%=post.id%>", style="padding-top: 2%;">
+
+       <%= link_to like_post_path(post), method: :put, remote: true, class: 'btn' do %> 
+     <o> Like </o>
+     <i class="small material-icons">thumb_up</i> <o id="liker_<%=post.id%>"> <%= post.get_upvotes.size %> </o>
+ <% end %>
+ </li>
+        
+   
+   <li id="dislike_post_<%=post.id%>", style="padding-top: 2%;">   
+      <%= link_to dislike_post_path(post), method: :put, remote: true, class: 'btn' do %> 
+     <o> Dislike</o>
+     <i class="small material-icons">thumb_down</i> <o id="disliker_<%=post.id%>"> <%= post.get_downvotes.size %> </o>
+ <% end %>
+ </li>
+</ul>
+       <div class="box15_ribbon"></div>
+</div>
+
+<% end %>
+</div>
+
+<%= will_paginate @posts %>

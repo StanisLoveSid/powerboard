@@ -1,0 +1,51 @@
+<% if flash[:notice] -%>
+ <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> fade in" style="padding-left: 8%; ">
+  <div class="card" style="background-color: #99ddff;">
+ 
+  <%= flash[:notice] %>
+  </div>
+  <% end %>
+<% end %> 
+
+
+<% if flash[:error] -%>
+ <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> fade in" style="padding-left: 8%;">
+  <div class="card" style="background-color: #ff1a1a;">
+ 
+  <%= flash[:error] %>
+  </div>
+  <% end %>
+<% end %>
+
+<% if flash[:alert] -%>
+ <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> fade in" style="padding-left: 8%;">
+  <div class="card" style="background-color: #ff1a1a;">
+ 
+  <%= flash[:alert] %>
+  </div>
+  <% end %>
+<% end %>
+
+<% if flash[:success] -%>
+ <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> fade in" style="padding-left: 8%;">
+  <div class="card" style="background-color: #99ddff;">
+ 
+  <%= flash[:success] %>
+  </div>
+  <% end %>
+<% end %>
+
+
+<% if flash[:info] -%>
+ <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> fade in" style="padding-left: 8%;">
+  <div class="card" style="background-color: #99ddff;">
+ 
+  <%= flash[:info] %>
+  </div>
+  <% end %>
+<% end %>

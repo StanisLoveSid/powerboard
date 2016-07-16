@@ -1,0 +1,207 @@
+<style>
+html, body {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+  background-color: white;
+  background-attachment: fixed;
+}
+
+</style>
+
+<div id="post_content">
+<div class="thecard", style="width: 1000px; background-color: white">
+
+<h1 class="title">
+	<%= @post.title %>
+</h1>
+
+<% @post.tags.any? %>
+    <div class="tags">
+     <% @post.tags.each do |tag| %>
+     
+        <%= link_to tag.name, tag_path(tag.name), class: "tag"%>
+      
+<% end %>
+</div>
+<div class="views">
+<%= "Просмотры (#{@post.impressionist_count}) " %>
+</div>
+
+<p class="date">
+<% if @post.user.name? %>
+<%= @post.user.name %>
+<% else %>
+ Инкогнито
+ <% end %>
+ написал(а)
+ <%= time_ago_in_words(@post.created_at) %> назад
+  
+
+  <% if current_user && current_user.admin? %>
+ <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t('posts.edit'), edit_post_path(@post), {:style=>'color:white;'}) %> </button>
+ <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t('posts.delete'), post_path(@post),:style=>'color:white;', method: :delete, data: {confirm: 'Are you sure? Ви впевнені? あなたは深刻ですか？'}) %><i class="material-icons right">delete</i> </button>
+  </p>
+ <% end %>
+<div style="padding-right: 20%;">
+ <% if @post.image.file? %>
+  <%=link_to image_tag(@post.image.url(:small)), @post.image.url(:original), :popup=>['original_image', 'height=700,width=900'] %>
+<% else %>
+  
+<% end %>
+</div>
+
+ <p class="body" >
+
+ <%= raw @post.body %>
+ </p>
+
+
+<% if @post.link?  %>
+<iframe width="560" height="349" src="http://www.youtube.com/embed/<%=@post.uid %>"></iframe>
+<% else %>
+
+<% end %>
+
+
+<% if @post.video? %>
+<%= video_tag @post.video.url(:medium), controls: true, style: "max-width: 100%;" %>
+ <% else %>
+
+ <% end %>
+
+<ul id="menu">
+  
+   <li id="like_post_<%=@post.id%>", style="padding-top: 2%;">
+
+       <%= link_to like_post_path(@post), method: :put, remote: true, class: 'btn' do %> 
+     <o> <%= t "lessons.like" %> </o>
+     <i class="small material-icons">thumb_up</i> <o id="liker_<%=@post.id%>"> <%= @post.get_upvotes.size %> </o>
+ <% end %>
+ </li>
+        
+   
+   <li id="dislike_post_<%=@post.id%>", style="padding-top: 2%;">   
+      <%= link_to dislike_post_path(@post), method: :put, remote: true, class: 'btn' do %> 
+     <o> <%= t "lessons.dislike" %> </o>
+     <i class="small material-icons">thumb_down</i> <o id="disliker_<%=@post.id%>"> <%= @post.get_downvotes.size %> </o>
+ <% end %>
+ </li>
+</ul>
+</div>
+<%= render "orders/form" %>
+
+  <div style="padding-top: 2%;"><%= link_to "Показать комментарии("+@post.comments.count.to_s+")", "#", id: "comments-link", class: "btn" %> </div>
+<section id="comments-section">
+ <div id="comments" style="padding-top: 5%;">
+	 
+	<script>
+  $('#comments').html("<%=j render @post.comments %>");
+</script>
+   
+	
+
+</div>
+<%= render "comments/form" %>
+</section>
+
+ 
+   </div>
+ </div>
+ <style>
+
+
+p {
+    margin: 0 0 1em;
+}
+
+.comment {
+    overflow: hidden;
+    padding: 0 0 1em;
+    border-bottom: 1px solid #ddd;
+    margin: 0 0 1em;
+    *zoom: 1;
+}
+
+.comment-img {
+    float: left;
+    margin-right: 33px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.comment-img img {
+    display: block;
+}
+
+.comment-body {
+    overflow: hidden;
+}
+
+.comment .text {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.comment .text p:last-child {
+    margin: 0;
+}
+
+.comment .attribution {
+    margin: 0.5em 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Decoration */
+
+.comments,
+.comment {
+    position: relative;
+}
+
+.comments:before,
+.comment:before,
+.comment .text:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 65px;
+}
+
+.comments:before {
+    width: 3px;
+    top: -20px;
+    bottom: -20px;
+    background: rgba(0,0,0,0.1);
+}
+
+.comment:before {
+    width: 9px;
+    height: 9px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    margin: 16px 0 0 -6px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+    background: #ccc;
+}
+
+.comment:hover:before {
+    background: orange;
+}
+
+.comment .text:before {
+    top: 18px;
+    left: 78px;
+    width: 9px;
+    height: 9px;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    background: #fff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}​
+</style>

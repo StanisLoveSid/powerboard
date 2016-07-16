@@ -1,0 +1,11 @@
+I"(function() {
+  $(document).on("page:change", function() {
+    return $("#comments-link").click(function(event) {
+      event.preventDefault();
+      $("#comments-section").fadeToggle();
+      return $("#comment_body").focus();
+    });
+  });
+
+}).call(this);
+:ET

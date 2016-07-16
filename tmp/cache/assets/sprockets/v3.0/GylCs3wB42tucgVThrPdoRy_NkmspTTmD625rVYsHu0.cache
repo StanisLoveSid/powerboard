@@ -1,0 +1,12 @@
+I"¶(function() {
+  jQuery(function() {
+    return $("#todo_items").sortable({
+      axis: 'y',
+      update: function() {
+        return $.post();
+      }
+    });
+  });
+
+}).call(this);
+:ET

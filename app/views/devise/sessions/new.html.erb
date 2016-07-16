@@ -1,0 +1,25 @@
+<div id="page_wrapper">
+	<h4>Войти</h4>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	
+  <div>Почта<br />
+  <%= f.email_field :email, autofocus: true , style: "width: 40%", class: "input-field col s12"%></div>
+  <br>
+  <div>Пароль<br />
+    <%= f.password_field :password, autocomplete: "off", style: "width: 40%" %></div>
+  <br>
+  <% if devise_mapping.rememberable? -%>
+	  <div><%= f.check_box :remember_me %><input type="checkbox" id="test5" /> <%= f.label("Запомнить меня", for: "test5") %></div>  
+  <% end %>
+  
+      
+  <br>
+  <div><%= f.submit("Войти", class: "btn waves-effect waves-light") %></div>
+<% end %>
+  <br>
+
+
+
+<%= render "devise/shared/links" %>
+</div>

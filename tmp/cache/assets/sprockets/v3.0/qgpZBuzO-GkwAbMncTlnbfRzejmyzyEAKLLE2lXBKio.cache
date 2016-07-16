@@ -1,0 +1,9 @@
+I"«(function() {
+  $(document).on("page:change", function() {
+    return $("#comments-link").click(function() {
+      return alert("Clicked!");
+    });
+  });
+
+}).call(this);
+:ET

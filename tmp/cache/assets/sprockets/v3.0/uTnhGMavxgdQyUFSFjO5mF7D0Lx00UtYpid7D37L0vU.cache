@@ -1,0 +1,10 @@
+I"Þ(function() {
+  $(document).on("page:change", function() {
+    return $("#comments-link").click(function() {
+      $("#comments-section").fadeToggle();
+      return $("comment_body").focus();
+    });
+  });
+
+}).call(this);
+:ET

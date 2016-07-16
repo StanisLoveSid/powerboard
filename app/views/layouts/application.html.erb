@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<meta name="google-site-verification" content="3li0DutDNLzYNQTjR5_Fym6cLjez59T8A15UUSo_TSM" />
+<meta name='yandex-verification' content='72297eb1250c1dc3' />
+  <title>Bloglab</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+ <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
+  <%= csrf_meta_tags %>
+
+<script src="https://www.google.com/jsapi"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+       
+ <% if user_signed_in? %>
+ <div class="navbar-fixed">
+ <nav>
+    <div class="nav-wrapper" style="background-color: #64b5f6;" >
+      <%= link_to('PowerBoard', root_path, class: "brand-logo", style: "padding-left:4%")  %>
+
+      <ul style="padding-left: 39%;">
+      <% if current_user && current_user.admin? %>
+      
+      <li><%= link_to "Новый пост", new_post_path %></li>
+      <% end %> 
+      <li style="padding-top: 3%;padding-right:3%"><h6 >Заказы за телефонами:    </h6> </li>
+      <li style="padding-top: 1.1%;"> <h5 style="padding-right:5%">  +380506630705,</h5></li>
+         <li style="padding-top: 1.1%;"> <h5 style="padding-right:5%;padding-left:5%"> +380679644028</h5></li>
+      <li style="padding-left:4%"><%= link_to 'Аккаунт', edit_user_registration_path %></li>
+      <li style="padding-right:0%"><%= link_to("Выйти", destroy_user_session_path, method: :delete) %></li>
+      </ul>
+    </div>
+  </nav>
+ </div>
+
+
+<%= render 'layouts/flash_messages' %>
+ <% else %>
+<div class="navbar-fixed">
+ <nav>
+    <div class="nav-wrapper" style="background-color: #64b5f6;">
+      <%= link_to('PowerBoard', root_path, class: "brand-logo", style: "padding-left:4%")  %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+       <li><%= link_to 'Регистрация', new_user_registration_path, class: "btn" %></li>
+       <li><%= link_to("Войти", new_post_path, class: "btn waves-effect waves-light") %></li> 
+
+  <li><%= link_to "Войти через Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %>
+  <li><%= link_to "Войти через VK", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %>
+
+</li>
+
+      </ul>
+    </div>
+  </nav>
+ </div>
+ 
+  <% end %>
+
+	 </div>
+ 
+
+ <%= yield %>
+
+
+ 
+
+ <footer class="page-footer" style="background-color: #64b5f6;">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">+380506630705</h5>
+                <h5 class="white-text">+380679644028</h5>
+                <p class="grey-text text-lighten-4">Телефоны для заказов</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Контактные ссылки</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="http://vk.com/id90664978">Разработчик</a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/profile.php?id=100008566571398">Инвестор</a></li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2016  PowerBoard. Все права защищены. 
+            <a class="grey-text text-lighten-4 right">Доставка гиробордов и пенибордов по всей Украине</a>
+            </div>
+          </div>
+        </footer>
+
+</body>
+</html>

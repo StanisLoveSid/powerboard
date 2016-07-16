@@ -1,0 +1,10 @@
+I"¢(function() {
+  jQuery(function() {
+    $('.best_in_place').best_in_place();
+    return $("#todo_items").sortable({
+      axis: 'y'
+    });
+  });
+
+}).call(this);
+:ET

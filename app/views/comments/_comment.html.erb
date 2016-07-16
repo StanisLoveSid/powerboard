@@ -1,0 +1,45 @@
+
+
+  
+<div class="comment_<%= comment.id %>">
+<%= div_for(comment) do %>
+    <article class="comment">
+      <a class="comment-img" href="#non">
+        <%= image_tag(comment.user.avatar(:small), size: "50", alt: "") %>
+      </a>
+
+      <div class="comment-body">
+        <div class="text">
+          <p><%= comment.body %></p>
+        
+              			 <% if comment.image.file? %>
+  <%=link_to image_tag(comment.image.url(:small)), comment.image.url(:original), :popup=>['original_image', 'height=700,width=900'] %>
+<% else %>
+  
+<% end %>
+
+<% if comment.document? %>
+    <%= link_to "Документ", comment.document.url, target: "_blank" %>  
+<% end %>
+
+<% if comment.video? %>
+<%= video_tag comment.video.url(:medium), controls: true, style: "max-width: 100%;" %>
+ <% else %>
+ <% end %>
+ </div>
+  <% if user_signed_in? %>
+        <p class="attribution"><% if comment.user.id == current_user.id %><%= link_to 'Удалить', comment, method: :delete, remote: true, class: "btn" %><% else %> <% end %> <% end %> <o style="padding-left: 1%;"><%= pluralize comment.reputation_for(:votes).to_i, "голос" %> </o>
+<%= link_to "За", vote_comment_path(comment, type: "up"), method: "post", class: "btn" %>
+   <%= link_to "Против", vote_comment_path(comment, type: "down"), method: "post", class: "btn" %><o style="padding-left: 3%;"><% if comment.user.name? %>
+                     <%= comment.user.name %>
+                     <% else %>
+                      Инкогнито
+                      <% end %></o>
+                       написал(а) <%= time_ago_in_words(comment.created_at) %> назад 
+			                </p>
+      </div>
+    </article>
+
+<% end %>
+</div>
+

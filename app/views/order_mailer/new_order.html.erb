@@ -1,0 +1,22 @@
+<h1>OrderMailer#new_order</h1>
+
+<p>
+<%= @post.title %>
+</p>
+<% if @post.link?  %>
+<iframe width="560" height="349" src="http://www.youtube.com/embed/<%=@post.uid %>"></iframe>
+<% else %>
+
+<% end %>
+<p>
+ Ім’я <%= @current_user.name %>
+ </p>
+ <p>
+   Адреса <%= 	@body %>
+ </p>
+ <p>
+  Номер <%=  @phone_number%> 
+  </p>
+  <p>
+ Колір <%=  @color %>
+</p>
